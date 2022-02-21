@@ -1,8 +1,9 @@
 # receiptline
 
-Printable digital receipts &#x1f9fe;  
+Markdown for receipts. Printable digital receipts. &#x1f9fe;  
+Generate receipt printer commands and SVG images.  
 
-Transform markdown-like text to receipt printer commands or SVG images.  
+[ReceiptIO](https://github.com/receiptline/receiptio) - Simple and easy API and CLI using receiptline, supporting printer status.  
 
 ![English](screenshot_en.png)  
 ![Japanese](screenshot_ja.png)  
@@ -22,7 +23,7 @@ This reference implementation also provides the development tool "ReceiptLine De
 # Receipt Printers
 
 - Epson TM series
-- SII RP series
+- Seiko Instruments RP series
 - Star MC series
 - Citizen CT series
 - Fujitsu FP series
@@ -47,7 +48,7 @@ const doc = '{code:2012345678903;option:ean,hri}';
 // printer example
 const printer = {
     cpl: 42,
-    encoding: 'cp437',
+    encoding: 'multilingual',
     upsideDown: false,
     gamma: 1.8,
     command: 'escpos'
@@ -57,7 +58,7 @@ const command = receiptline.transform(doc, printer);
 // display example
 const display = {
     cpl: 42,
-    encoding: 'cp437'
+    encoding: 'multilingual'
 };
 const svg = receiptline.transform(doc, display);
 ```
@@ -82,6 +83,7 @@ const svg = receiptline.transform(doc, display);
 - `cpl`
   - characters per line (default: `48`)
 - `encoding`
+  - `multilingual`: Multilingual (including cp437, cp852, cp858, cp866, cp1252)
   - `cp437`: United States (default)
   - `cp852`: Central European
   - `cp858`: Western European
@@ -117,7 +119,7 @@ const svg = receiptline.transform(doc, display);
 - `command`
   - `svg`: SVG (default)
   - `escpos`: ESC/POS (Epson)
-  - `sii`: ESC/POS (SII)
+  - `sii`: ESC/POS (Seiko Instruments)
   - `citizen`: ESC/POS (Citizen)
   - `fit`: ESC/POS (Fujitsu)
   - `impact`: ESC/POS (TM-U220)
@@ -154,6 +156,10 @@ Enter markdown-like text from the web form, transform it to SVG images on the we
 ### example/data/\*
 
 The documents (markdown-like text) are the same as the examples in the OFSC ReceiptLine Specification.  
+
+### example/command/\*
+
+Customize the command object to output your own commands.  
 
 # Libraries
 
